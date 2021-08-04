@@ -61,7 +61,29 @@ namespace ADO_AddressBook
         {
             //Open Connection
             sqlConnection.Open();
-            string query = "Update Address_Book_Table set Email = 'RaniMalvi@gmail.com' where FirstName = 'Rani'";
+            string query = "Update Address_Book_Table set Email = 'RaniMalvi@gmail.com' where FirstName = 'Pramela'";
+            //Pass query to TSql
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+            int result = sqlCommand.ExecuteNonQuery();
+            if (result != 0)
+            {
+                Console.WriteLine("Updated!");
+            }
+            else
+            {
+                Console.WriteLine("Not Updated!");
+            }
+
+            //Close Connection
+            sqlConnection.Close();
+            return result;
+        }
+        //UseCase 3: Modify Existing Contact using their name
+        public int DeletePersonBasedonName()
+        {
+            //Open Connection
+            sqlConnection.Open();
+            string query = "delete from Address_Book_Table where FirstName = 'Anita' and LastName = 'Vargheese'";
             //Pass query to TSql
             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
             int result = sqlCommand.ExecuteNonQuery();
