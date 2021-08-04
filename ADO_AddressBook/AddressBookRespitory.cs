@@ -52,7 +52,7 @@ namespace ADO_AddressBook
             }
 
             sqlConnection.Close();
-           
+
             return result;
         }
 
@@ -78,7 +78,7 @@ namespace ADO_AddressBook
             sqlConnection.Close();
             return result;
         }
-        //UseCase 3: Modify Existing Contact using their name
+        //UseCase 4: Modify Existing Contact using their name
         public int DeletePersonBasedonName()
         {
             //Open Connection
@@ -100,6 +100,26 @@ namespace ADO_AddressBook
             sqlConnection.Close();
             return result;
         }
+        //UseCase 5: Ability to Retrieve Person belonging to a City or State from the Address Book
+        public string PrintDataBasedOnCity(string city,string State)
+        {
+            string nameList = "";
+            //query to be executed
+            string query = @"select * from Address_Book_Table where City =" + "'" + city + "' or State="+"'" + State + "'";
+            SqlCommand sqlCommand = new SqlCommand(query, this.sqlConnection);
+            sqlConnection.Open();
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+            if (sqlDataReader.HasRows)
+            {
+                while (sqlDataReader.Read())
+                {
+                    DisplayEmployeeDetails(sqlDataReader);
+                    nameList += sqlDataReader["FirstName"].ToString() + " ";
+                }
+            }
+            return nameList;
+        }
+
 
         public void DisplayEmployeeDetails(SqlDataReader sqlDataReader)
         {
@@ -110,9 +130,10 @@ namespace ADO_AddressBook
             addressBook.PhoneNumber = Convert.ToInt64(sqlDataReader["PhoneNumber"]);
             addressBook.Email = Convert.ToString(sqlDataReader["email"]);
             addressBook.AddressBookName = Convert.ToString(sqlDataReader["AddressBookName"]);
-            addressBook.Type = Convert.ToString(sqlDataReader["TypeOfAddressBook"]);
-            Console.WriteLine("{0} | {1} | {2} | {3} | {4} | {5} | {6}", addressBook.FirstName, addressBook.LastName, addressBook.Address, addressBook.PhoneNumber, addressBook.Email, addressBook.AddressBookName, addressBook.Type);
+            addressBook.Type = Convert.ToString(sqlDataReader["Type"]);
+            Console.WriteLine("{0} \t {1} \t {2} \t {3} \t {4} \t {5} \t {6}", addressBook.FirstName, addressBook.LastName, addressBook.Address, addressBook.PhoneNumber, addressBook.Email, addressBook.AddressBookName, addressBook.Type);
 
         }
     }
 }
+
