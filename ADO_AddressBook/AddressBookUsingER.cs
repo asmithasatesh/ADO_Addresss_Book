@@ -92,7 +92,6 @@ namespace ADO_AddressBook
                         nameList += sqlDataReader[0].ToString() + " ";
                     }
                 }
-
             }
             return nameList;
         }
