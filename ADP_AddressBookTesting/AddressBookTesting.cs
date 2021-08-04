@@ -72,5 +72,13 @@ namespace ADP_AddressBookTesting
             string actual = addressBookRepository.PrintSortDataBasedOnCity("Bangalore");
             Assert.AreEqual(expected, actual);
         }
+        //UC 8: Ability to get number of contact persons by Type
+        [TestMethod]
+        public void GivenCountTypeQuery_ReturnString()
+        {
+            string expected = "1 5 1 ";
+            string actual = addressBookRepository.ContactDataBasedOnType();
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
