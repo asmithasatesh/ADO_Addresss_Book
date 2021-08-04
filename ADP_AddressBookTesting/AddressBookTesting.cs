@@ -7,10 +7,12 @@ namespace ADP_AddressBookTesting
     public class AddressBookTesting
     {
         AddressBookRespitory addressBookRepository;
+        AddressBookUsingER addressBookUsingER;
         [TestInitialize]
         public void SetUp()
         {
             addressBookRepository = new AddressBookRespitory();
+            addressBookUsingER = new AddressBookUsingER();
         }
 
         //Usecase 2:Ability to insert new Contacts to Address Book
@@ -53,7 +55,7 @@ namespace ADP_AddressBookTesting
         public void GivenRetrieveQuery_ReturnString()
         {
             string expected = "Harsha Pramela meena ";
-            string actual = addressBookRepository.PrintDataBasedOnCity("Bangalore","Karnataka");
+            string actual = addressBookRepository.PrintDataBasedOnCity("Bangalore", "Karnataka");
             Assert.AreEqual(expected, actual);
         }
         //UC 6: Ability to Retrieve Count of Person belonging to a City or State
@@ -78,6 +80,41 @@ namespace ADP_AddressBookTesting
         {
             string expected = "1 5 1 ";
             string actual = addressBookRepository.ContactDataBasedOnType();
+            Assert.AreEqual(expected, actual);
+        }
+
+        //Using ER Implementation 
+
+        //UseCase 5: Ability to Retrieve Person belonging to a City or State from the Address Book
+        [TestMethod]
+        public void GivenRetrieveQuery_UsingER_ReturnString()
+        {
+            string expected = "Harsha Pramela Rujula Anita Anita ";
+            string actual = addressBookUsingER.PrintDataBasedOnCityAfterER("Bangalore", "Karnataka");
+            Assert.AreEqual(expected, actual);
+        }
+        //UC 6: Ability to Retrieve Count of Person belonging to a City or State
+        [TestMethod]
+        public void GivenCountQuery_UsingER_ReturnString()
+        {
+            string expected = "2 1 1 ";
+            string actual = addressBookUsingER.PrintCountBasedOnCityAndStateNameAfterER();
+            Assert.AreEqual(expected, actual);
+        }
+        //UC 7: Ability to retrieve entries sorted alphabetically
+        [TestMethod]
+        public void GivenSortQuery_UsingER_ReturnString()
+        {
+            string expected = "Harsha Pramela ";
+            string actual = addressBookUsingER.PrintSortedNameBasedOnCityAfterER("Bangalore");
+            Assert.AreEqual(expected, actual);
+        }
+        //UC 8: Ability to get number of contact persons by Type
+        [TestMethod]
+        public void GivenCountTypeQuery_UsingER_ReturnString()
+        {
+            string expected = "2 2 1 ";
+            string actual = addressBookUsingER.PrintCountBasedOnAddressBookTypeAfterER();
             Assert.AreEqual(expected, actual);
         }
     }
