@@ -139,6 +139,15 @@ namespace ADP_AddressBookTesting
         }
         //UC 11: Insert into Table using Transactions
         [TestMethod]
+        public void GivenSelectQuery_UsingTransaction_ReturnInt()
+        {
+            TransactionClass transactionSelect = new TransactionClass();
+            string expected = "Neha Kejriwal ";
+            string actual = transactionSelect.RetrievebasedOnDate();
+            Assert.AreEqual(expected, actual);
+        }
+        //UC 12: Insert into Table using Transactions
+        [TestMethod]
         public void GivenInsertQuery_UsingTransaction_ReturnInt()
         {
             TransactionClass transactions = new TransactionClass();
