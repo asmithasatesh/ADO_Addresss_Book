@@ -61,7 +61,15 @@ namespace ADP_AddressBookTesting
         public void GivenCountQuery_ReturnString()
         {
             string expected = "2 1 3 1 ";
-            string actual = addressBookRepository.PrintCountDataBasedOnCity();
+            string actual = addressBookRepository.PrintCountDataBasedOnCityorState();
+            Assert.AreEqual(expected, actual);
+        }
+        //UC 7: Ability to retrieve entries sorted alphabetically
+        [TestMethod]
+        public void GivenSortQuery_ReturnString()
+        {
+            string expected = "Harsha Pramela ";
+            string actual = addressBookRepository.PrintSortDataBasedOnCity("Bangalore");
             Assert.AreEqual(expected, actual);
         }
     }

@@ -121,7 +121,7 @@ namespace ADO_AddressBook
         }
 
         //UC 6: Ability to Retrieve Count of Person belonging to a City or State
-        public string PrintCountDataBasedOnCity()
+        public string PrintCountDataBasedOnCityorState()
         {
             string nameList = "";
             //query to be executed
@@ -139,7 +139,25 @@ namespace ADO_AddressBook
             }
             return nameList;
         }
-
+        //UC 7: Ability to retrieve entries sorted alphabetically
+        public string PrintSortDataBasedOnCity(string City)
+        {
+            string nameList = "";
+            //query to be executed
+            string query = "select * from Address_Book_Table where City='"+City+"' order by(FirstName)";
+            SqlCommand sqlCommand = new SqlCommand(query, this.sqlConnection);
+            sqlConnection.Open();
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+            if (sqlDataReader.HasRows)
+            {
+                while (sqlDataReader.Read())
+                {
+                    DisplayEmployeeDetails(sqlDataReader);
+                    nameList += sqlDataReader["FirstName"].ToString() + " ";
+                }
+            }
+            return nameList;
+        }
 
         public void DisplayEmployeeDetails(SqlDataReader sqlDataReader)
         {
