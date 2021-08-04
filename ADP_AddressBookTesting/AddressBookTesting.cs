@@ -32,5 +32,13 @@ namespace ADP_AddressBookTesting
             int actual = addressBookRepository.InsertIntoTable(addressBook);
             Assert.AreEqual(expected, actual);
         }
+        //UseCase 3: Modify Existing Contact using their name
+        [TestMethod]
+        public void GivenUpdateQuery_ReturnOne()
+        {
+            int expected = 1;
+            int actual = addressBookRepository.UpdateQueryBasedonName();
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
