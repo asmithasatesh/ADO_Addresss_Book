@@ -155,5 +155,15 @@ namespace ADP_AddressBookTesting
             int actual = transactions.InsertIntoTables();
             Assert.AreEqual(expected, actual);
         }
+
+        //UC 13: Add multiple contacts to List
+        [TestMethod]
+        public void GivenSelectQuery_UsingTransaction_ReturnCount()
+        {
+            TransactionClass transactions = new TransactionClass();
+            int expected = 7;
+            int actual = transactions.AddMultipleDataToList();
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
